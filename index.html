@@ -46,28 +46,31 @@
           <p class="name"></p>
           <p class="street"></p>
           <p class="citystate"></p>
-          <div class="eachpizza">
-            <div class="form-group">
-              <label for="size">Select a size:</label>
-              <select class="form-control size">
-                <option value="Small">Small (10"), $10</option>
-                <option value="Medium">Medium (12"), $12</option>
-                <option value="Large">Large (14"), $15</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="topping">Select toppings:</label>
-              <p>All pizzas come with tomato sauce. All toppings are $1 each (including cheese):</p>
-              <input type="checkbox" name="topping" value="cheese" checked> Cheese<br>
-              <input type="checkbox" name="topping" value="pepperoni"> Pepperoni<br>
-              <input type="checkbox" name="topping" value="mushrooms"> Mushrooms<br>
-              <input type="checkbox" name="topping" value="onions"> Onions<br>
-              <input type="checkbox" name="topping" value="extra cheese"> Extra cheese<br>
-              <input type="checkbox" name="topping" value="black olives"> Black olives<br>
-              <input type="checkbox" name="topping" value="green peppers"> Green peppers<br>
-              <input type="checkbox" name="topping" value="spinach"> Spinach<br>
+          <div id="new-pizza">
+            <div class="eachpizza">
+              <div class="form-group">
+                <label for="size">Select a size:</label>
+                <select class="form-control size">
+                  <option value="Small">Small (10"), $10</option>
+                  <option value="Medium">Medium (12"), $12</option>
+                  <option value="Large">Large (14"), $15</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="topping">Select toppings:</label>
+                <p>All pizzas come with tomato sauce. All toppings are $1 each (including cheese):</p>
+                <input type="checkbox" name="topping" value="cheese" checked> Cheese<br>
+                <input type="checkbox" name="topping" value="pepperoni"> Pepperoni<br>
+                <input type="checkbox" name="topping" value="mushrooms"> Mushrooms<br>
+                <input type="checkbox" name="topping" value="onions"> Onions<br>
+                <input type="checkbox" name="topping" value="extra cheese"> Extra cheese<br>
+                <input type="checkbox" name="topping" value="black olives"> Black olives<br>
+                <input type="checkbox" name="topping" value="green peppers"> Green peppers<br>
+                <input type="checkbox" name="topping" value="spinach"> Spinach<br>
+              </div>
             </div>
           </div>
+
           <button type="button" class="btn btn-info" id="add-pizza">Add Another Pizza</button>
           <button type="submit" class="btn btn-warning">Submit Order</button>
         </form>
@@ -78,16 +81,9 @@
         <p class="name"></p>
         <p class="street"></p>
         <p class="citystate"></p>
-        <div class="eachpizza-receipt">
-          <h3>Size:</h3>
-          <p class="size"></p>
-          <h3>Toppings:</h3>
-          <ul>
+        <div id="new-receipt">
 
-          </ul>
         </div>
-
-        <h3>Total: $<span class="price"></span></h3>
       </div>
     </div>
   </body>

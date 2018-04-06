@@ -1,4 +1,8 @@
 // Business Logic
+var newOrder = {
+  pizzas: [],
+};
+
 function Pizza(size) {
   this.size = size;
   this.toppings = [];
@@ -13,8 +17,11 @@ function Person(name, street, city, state, zip) {
   this.zip = zip;
 }
 
-function Order() {
-  this.order = [];
+function totalPrice(array) {
+  array.forEach(function(item){
+    var sum = 0;
+    sum += item.price;
+  });
 }
 
 Pizza.prototype.priceTotal = function () {
@@ -55,48 +62,53 @@ $(document).ready(function() {
   });
 
   $("#add-pizza").click(function(){
-    $(".eachpizza").append( '<div class="eachpizza">' +
-                '<div class="form-group">' +
-                  '<label for="size">Select a size:</label>' +
-                  '<select class="form-control size">' +
-                    '<option value="Small">Small (10"), $10</option>' +
-                    '<option value="Medium">Medium (12"), $12</option>' +
-                    '<option value="Large">Large (14"), $15</option>' +
-                  '</select>' +
-                '</div>' +
-                '<div class="form-group">' +
-                  '<label for="topping">Select toppings:</label>' +
-                  '<p>All pizzas come with tomato sauce. All toppings are $1 each (including cheese):</p>' +
-                  '<input type="checkbox" name="topping" value="cheese" checked> Cheese<br>' +
-                  '<input type="checkbox" name="topping" value="pepperoni"> Pepperoni<br>' +
-                  '<input type="checkbox" name="topping" value="mushrooms"> Mushrooms<br>' +
-                  '<input type="checkbox" name="topping" value="onions"> Onions<br>' +
-                  '<input type="checkbox" name="topping" value="extra cheese"> Extra cheese<br>' +
-                  '<input type="checkbox" name="topping" value="black olives"> Black olives<br>' +
-                  '<input type="checkbox" name="topping" value="green peppers"> Green peppers<br>' +
-                  '<input type="checkbox" name="topping" value="spinach"> Spinach<br>' +
-                '</div>' +
-              '</div>');
+    $("#new-pizza").append( '<div class="eachpizza">' +
+                              '<div class="form-group">' +
+                                '<label for="size">Select a size:</label>' +
+                                '<select class="form-control size">' +
+                                  '<option value="Small">Small (10"), $10</option>' +
+                                  '<option value="Medium">Medium (12"), $12</option>' +
+                                  '<option value="Large">Large (14"), $15</option>' +
+                                '</select>' +
+                              '</div>' +
+                              '<div class="form-group">' +
+                                '<label for="topping">Select toppings:</label>' +
+                                '<p>All pizzas come with tomato sauce. All toppings are $1 each (including cheese):</p>' +
+                                '<input type="checkbox" name="topping" value="cheese" checked> Cheese<br>' +
+                                '<input type="checkbox" name="topping" value="pepperoni"> Pepperoni<br>' +
+                                '<input type="checkbox" name="topping" value="mushrooms"> Mushrooms<br>' +
+                                '<input type="checkbox" name="topping" value="onions"> Onions<br>' +
+                                '<input type="checkbox" name="topping" value="extra cheese"> Extra cheese<br>' +
+                                '<input type="checkbox" name="topping" value="black olives"> Black olives<br>' +
+                                '<input type="checkbox" name="topping" value="green peppers"> Green peppers<br>' +
+                                '<input type="checkbox" name="topping" value="spinach"> Spinach<br>' +
+                              '</div>' +
+                            '</div>');
   });
 
   $(".order-form form").submit(function(event){
     event.preventDefault();
     $("ul").empty();
 
-    var inputSize = $(".size").val();
-    var newPizza = new Pizza(inputSize);
-
-    $("input:checkbox[name=topping]:checked").each(function(){
-      newPizza.toppings.push($(this).val());
+    $(".eachpizza").each(function() {
+      var inputSize = $(this).find(".size").val();
+      var newPizza = new Pizza(inputSize);
+      $(this).find("input:checkbox[name=topping]:checked").each(function(){
+        newPizza.toppings.push($(this).val());
+      });
+      newPizza.priceTotal();
+      newOrder.pizzas.push(newPizza);
     });
 
-    var newPrice = newPizza.priceTotal();
-
+    newOrder.pizzas.forEach(function(pizza) {
+      $("#new-receipt").append( '<div class="eachpizza-receipt">' +
+                                  '<p>' + '<strong>Size</strong>: ' + pizza.size + '</p>' +
+                                  '<p><strong>Toppings</strong>: ' + pizza.toppings.join(", ") + '</p>' +
+                                  '<p><strong>Subtotal</strong>: ' + '$' + pizza.price + '</p>' +
+                                  '</div>');
+    });
     $(".receipt").fadeIn();
-    $(".receipt .size").text(newPizza.size);
-    newPizza.toppings.forEach(function(topping){
-      $(".receipt ul").append("<li>" + topping + "</li>");
-    });
-    $(".receipt .price").text(newPizza.price);
+    var total = totalPrice(newOrder.pizzas);
+    $("#new-receipt h3").text(total);
   });
 });
