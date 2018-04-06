@@ -13,6 +13,10 @@ function Person(name, street, city, state, zip) {
   this.zip = zip;
 }
 
+function Order() {
+  this.order = [];
+}
+
 Pizza.prototype.priceTotal = function () {
   if (this.size === "Small") {
     this.price = 10;
@@ -42,18 +46,44 @@ $(document).ready(function() {
 
     var newPerson = new Person(inputName, inputStreet, inputCity, inputState, inputZip);
 
-    $(".receipt .name").text(newPerson.name);
-    $(".receipt .street").text(newPerson.street);
-    $(".receipt .citystate").text(newPerson.city + ", " + newPerson.state + " " + newPerson.zip);
+    $(".name").text(newPerson.name);
+    $(".street").text(newPerson.street);
+    $(".citystate").text(newPerson.city + ", " + newPerson.state + " " + newPerson.zip);
 
-    $(".greeting").slideUp(); 
+    $(".greeting").slideUp();
+    $(".order-form").show();
   });
 
-  $("form").submit(function(event){
+  $("#add-pizza").click(function(){
+    $(".eachpizza").append( '<div class="eachpizza">' +
+                '<div class="form-group">' +
+                  '<label for="size">Select a size:</label>' +
+                  '<select class="form-control size">' +
+                    '<option value="Small">Small (10"), $10</option>' +
+                    '<option value="Medium">Medium (12"), $12</option>' +
+                    '<option value="Large">Large (14"), $15</option>' +
+                  '</select>' +
+                '</div>' +
+                '<div class="form-group">' +
+                  '<label for="topping">Select toppings:</label>' +
+                  '<p>All pizzas come with tomato sauce. All toppings are $1 each (including cheese):</p>' +
+                  '<input type="checkbox" name="topping" value="cheese" checked> Cheese<br>' +
+                  '<input type="checkbox" name="topping" value="pepperoni"> Pepperoni<br>' +
+                  '<input type="checkbox" name="topping" value="mushrooms"> Mushrooms<br>' +
+                  '<input type="checkbox" name="topping" value="onions"> Onions<br>' +
+                  '<input type="checkbox" name="topping" value="extra cheese"> Extra cheese<br>' +
+                  '<input type="checkbox" name="topping" value="black olives"> Black olives<br>' +
+                  '<input type="checkbox" name="topping" value="green peppers"> Green peppers<br>' +
+                  '<input type="checkbox" name="topping" value="spinach"> Spinach<br>' +
+                '</div>' +
+              '</div>');
+  });
+
+  $(".order-form form").submit(function(event){
     event.preventDefault();
     $("ul").empty();
 
-    var inputSize = $("#size").val();
+    var inputSize = $(".size").val();
     var newPizza = new Pizza(inputSize);
 
     $("input:checkbox[name=topping]:checked").each(function(){

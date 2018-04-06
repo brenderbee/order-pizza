@@ -1,3 +1,18 @@
+.order-form {
+  display: none;
+}
+
+.eachpizza {
+  border-top: 1px solid black;
+}
+
+.eachpizza-receipt {
+  border-top: 1px solid black;
+}
+
+.eachpizza label.size {
+  margin-top: 24px;
+}
 .receipt {
   display: none;
 }
