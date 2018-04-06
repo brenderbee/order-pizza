@@ -17,13 +17,6 @@ function Person(name, street, city, state, zip) {
   this.zip = zip;
 }
 
-function totalPrice(array) {
-  array.forEach(function(item){
-    var sum = 0;
-    sum += item.price;
-  });
-}
-
 Pizza.prototype.priceTotal = function () {
   if (this.size === "Small") {
     this.price = 10;
@@ -88,7 +81,6 @@ $(document).ready(function() {
 
   $(".order-form form").submit(function(event){
     event.preventDefault();
-    $("ul").empty();
 
     $(".eachpizza").each(function() {
       var inputSize = $(this).find(".size").val();
@@ -107,8 +99,13 @@ $(document).ready(function() {
                                   '<p><strong>Subtotal</strong>: ' + '$' + pizza.price + '</p>' +
                                   '</div>');
     });
+
+    $(".order-form").slideUp();
     $(".receipt").fadeIn();
-    var total = totalPrice(newOrder.pizzas);
-    $("#new-receipt h3").text(total);
+  });
+
+  $("#confirm").click(function() {
+    $(".receipt").slideUp();
+    $(".thankyou").fadeIn();
   });
 });

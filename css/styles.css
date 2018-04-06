@@ -14,6 +14,11 @@
 .eachpizza label.size {
   margin-top: 24px;
 }
+
 .receipt {
+  display: none;
+}
+
+.thankyou {
   display: none;
 }
