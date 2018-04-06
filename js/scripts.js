@@ -4,10 +4,10 @@ function Pizza(size) {
   this.toppings = [];
 }
 
-function resetFields() {
-  newPizza.name = "";
-  newPizza.toppings = [];
-}
+// function resetFields() {
+//   newPizza.name = "";
+//   newPizza.toppings = [];
+// }
 
 // User Interface Logic
 $(document).ready(function() {
@@ -16,13 +16,18 @@ $(document).ready(function() {
     $("ul").empty();
 
     var inputSize = $("#size").val();
-    var inputToppings = $("input:checkbox[name=toppings]:checked").val();
-
     var newPizza = new Pizza(inputSize);
 
-    $(".receipt .size").text(newPizza.size);
-    $(".receipt ul").append("<li>" + inputToppings + "</li>");
+    $("input:checkbox[name=topping]:checked").each(function(){
+      newPizza.toppings.push($(this).val());
+    });
 
-    resetFields();
+    $(".receipt .size").text(newPizza.size);
+
+    newPizza.toppings.forEach(function(topping){
+      $(".receipt ul").append("<li>" + topping + "</li>");
+    });
+
+    // resetFields();
   });
 });
