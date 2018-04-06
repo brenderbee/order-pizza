@@ -19,10 +19,15 @@
           <div class="form-group">
             <label for="size">Select a size:</label>
             <select class="form-control" id="size">
-              <option value="Small">Small (10")</option>
-              <option value="Medium">Medium (12")</option>
-              <option value="Large">Large (14")</option>
+              <option value="Small">Small (10"), $10</option>
+              <option value="Medium">Medium (12"), $12</option>
+              <option value="Large">Large (14"), $15</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label for="toppings">Select toppings:</label>
+            <p>All pizzas come with tomato sauce. All toppings are $1 each:</p>
+            <input type="checkbox" name="toppings" value="cheese"> Cheese<br>
           </div>
           <button type="submit" class="btn btn-warning">Submit Order</button>
         </form>
@@ -30,6 +35,10 @@
       <div class="well receipt">
         <h2>Your Order:</h2>
         <h3>Size: <span class="size"></span></h3>
+        <h3>Toppings:</h3>
+          <ul>
+            
+          </ul>
       </div>
     </div>
   </body>
