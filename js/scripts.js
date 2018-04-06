@@ -5,6 +5,14 @@ function Pizza(size) {
   this.price = 0;
 }
 
+function Person(name, street, city, state, zip) {
+  this.name = name;
+  this.street = street;
+  this.city = city;
+  this.state = state;
+  this.zip = zip;
+}
+
 Pizza.prototype.priceTotal = function () {
   if (this.size === "Small") {
     this.price = 10;
@@ -23,6 +31,24 @@ Pizza.prototype.priceTotal = function () {
 
 // User Interface Logic
 $(document).ready(function() {
+  $(".greeting form").submit(function(event) {
+    event.preventDefault();
+
+    var inputName = $("#name").val();
+    var inputStreet = $("#street").val();
+    var inputCity = $("#city").val();
+    var inputState = $("#state").val();
+    var inputZip = $("#zip").val();
+
+    var newPerson = new Person(inputName, inputStreet, inputCity, inputState, inputZip);
+
+    $(".receipt .name").text(newPerson.name);
+    $(".receipt .street").text(newPerson.street);
+    $(".receipt .citystate").text(newPerson.city + ", " + newPerson.state + " " + newPerson.zip);
+
+    $(".greeting").slideUp(); 
+  });
+
   $("form").submit(function(event){
     event.preventDefault();
     $("ul").empty();
@@ -36,11 +62,11 @@ $(document).ready(function() {
 
     var newPrice = newPizza.priceTotal();
 
+    $(".receipt").fadeIn();
     $(".receipt .size").text(newPizza.size);
     newPizza.toppings.forEach(function(topping){
       $(".receipt ul").append("<li>" + topping + "</li>");
     });
     $(".receipt .price").text(newPizza.price);
-
   });
 });
