@@ -4,10 +4,16 @@ function Pizza(size) {
   this.toppings = [];
 }
 
+function resetFields() {
+  newPizza.name = "";
+  newPizza.toppings = [];
+}
+
 // User Interface Logic
 $(document).ready(function() {
   $("form").submit(function(event){
     event.preventDefault();
+    $("ul").empty();
 
     var inputSize = $("#size").val();
     var inputToppings = $("input:checkbox[name=toppings]:checked").val();
@@ -16,5 +22,7 @@ $(document).ready(function() {
 
     $(".receipt .size").text(newPizza.size);
     $(".receipt ul").append("<li>" + inputToppings + "</li>");
+
+    resetFields();
   });
 });
