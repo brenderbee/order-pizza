@@ -1,4 +1,8 @@
 // Business Logic
+function Pizza(size) {
+  this.size = size;
+  this.toppings = [];
+}
 
 // User Interface Logic
 $(document).ready(function() {
@@ -7,6 +11,8 @@ $(document).ready(function() {
 
     var inputSize = $("#size").val();
 
-    $(".receipt .size").text(inputSize);
+    var newPizza = new Pizza(inputSize);
+
+    $(".receipt .size").text(newPizza.size);
   });
 });
