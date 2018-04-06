@@ -2,12 +2,24 @@
 function Pizza(size) {
   this.size = size;
   this.toppings = [];
+  this.price = 0;
 }
 
-// function resetFields() {
-//   newPizza.name = "";
-//   newPizza.toppings = [];
-// }
+Pizza.prototype.priceTotal = function () {
+  if (this.size === "Small") {
+    this.price = 10;
+  } else if (this.size === "Medium") {
+    this.price = 12;
+  } else {
+    this.price = 15;
+  }
+
+  for (var i = 0; i < this.toppings.length; i++) {
+    this.price = this.price + 1;
+  }
+
+  return this.price;
+};
 
 // User Interface Logic
 $(document).ready(function() {
@@ -22,12 +34,13 @@ $(document).ready(function() {
       newPizza.toppings.push($(this).val());
     });
 
-    $(".receipt .size").text(newPizza.size);
+    var newPrice = newPizza.priceTotal();
 
+    $(".receipt .size").text(newPizza.size);
     newPizza.toppings.forEach(function(topping){
       $(".receipt ul").append("<li>" + topping + "</li>");
     });
+    $(".receipt .price").text(newPizza.price);
 
-    // resetFields();
   });
 });
