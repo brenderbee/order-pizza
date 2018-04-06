@@ -9,6 +9,28 @@
     <title>Order Form</title>
   </head>
   <body>
-
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Order Pizza</h1>
+      </div>
+      <div class="well order-form">
+        <h2>Order Form</h2>
+        <form>
+          <div class="form-group">
+            <label for="size">Select a size:</label>
+            <select class="form-control" id="size">
+              <option value="Small">Small (10")</option>
+              <option value="Medium">Medium (12")</option>
+              <option value="Large">Large (14")</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-warning">Submit Order</button>
+        </form>
+      </div>
+      <div class="well receipt">
+        <h2>Your Order:</h2>
+        <h3>Size: <span class="size"></span></h3>
+      </div>
+    </div>
   </body>
 </html>
