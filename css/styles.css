@@ -11,8 +11,12 @@
   margin-top: 16px;
 }
 
-.eachpizza label.size {
-  margin-top: 24px;
+.eachpizza-receipt .receiptsize {
+  margin-top: 16px;
+}
+
+.eachpizza label.sizeselect {
+  margin-top: 16px;
 }
 
 .receipt {

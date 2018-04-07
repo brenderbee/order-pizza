@@ -68,7 +68,7 @@ $(document).ready(function() {
   $("#add-pizza").click(function(){
     $("#new-pizza").append( '<div class="eachpizza">' +
                               '<div class="form-group">' +
-                                '<label for="size">Select a size:</label>' +
+                                '<label for="size" class="sizeselect">Select a size:</label>' +
                                 '<select class="form-control size">' +
                                   '<option value="Small">Small (10"), $10</option>' +
                                   '<option value="Medium">Medium (12"), $12</option>' +
@@ -107,7 +107,7 @@ $(document).ready(function() {
     // Receipt for each pizza
     newOrder.pizzas.forEach(function(pizza) {
       $("#new-receipt").append( '<div class="eachpizza-receipt">' +
-                                  '<p>' + '<strong>Size</strong>: ' + pizza.size + '</p>' +
+                                  '<p class="receiptsize">' + '<strong>Size</strong>: ' + pizza.size + '</p>' +
                                   '<p><strong>Toppings</strong>: ' + pizza.toppings.join(", ") + '</p>' +
                                   '<p><strong>Subtotal</strong>: ' + '$' + pizza.price + '</p>' +
                                   '</div>');
