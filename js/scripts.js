@@ -17,6 +17,14 @@ function Person(name, street, city, state, zip) {
   this.zip = zip;
 }
 
+function TotalPayment(object) {
+  var sum = 0;
+  object.pizzas.forEach(function(pizza) {
+    sum += pizza.price;
+  });
+  return sum;
+}
+
 Pizza.prototype.priceTotal = function () {
   if (this.size === "Small") {
     this.price = 10;
@@ -35,6 +43,8 @@ Pizza.prototype.priceTotal = function () {
 
 // User Interface Logic
 $(document).ready(function() {
+
+  // Delivery Address
   $(".greeting form").submit(function(event) {
     event.preventDefault();
 
@@ -54,6 +64,7 @@ $(document).ready(function() {
     $(".order-form").show();
   });
 
+  // Adds new pizza
   $("#add-pizza").click(function(){
     $("#new-pizza").append( '<div class="eachpizza">' +
                               '<div class="form-group">' +
@@ -79,6 +90,7 @@ $(document).ready(function() {
                             '</div>');
   });
 
+  // Places order
   $(".order-form form").submit(function(event){
     event.preventDefault();
 
@@ -92,6 +104,7 @@ $(document).ready(function() {
       newOrder.pizzas.push(newPizza);
     });
 
+    // Receipt for each pizza
     newOrder.pizzas.forEach(function(pizza) {
       $("#new-receipt").append( '<div class="eachpizza-receipt">' +
                                   '<p>' + '<strong>Size</strong>: ' + pizza.size + '</p>' +
@@ -99,11 +112,13 @@ $(document).ready(function() {
                                   '<p><strong>Subtotal</strong>: ' + '$' + pizza.price + '</p>' +
                                   '</div>');
     });
-
+    var total = TotalPayment(newOrder);
+    $(".total").text("Total: $" + total);
     $(".order-form").slideUp();
     $(".receipt").fadeIn();
   });
 
+  // Confirmation screen
   $("#confirm").click(function() {
     $(".receipt").slideUp();
     $(".thankyou").fadeIn();
